@@ -222,8 +222,9 @@ function pageR(){
 function go(p){page=p;sel=-1;window.scrollTo(0,0);render()}
 function render(){var d=page==="d";
   $("seg").style.display=d?"flex":"none";$("dn").style.display=d?"flex":"none";$("srch").style.display=page==="r"?"flex":"none";
-  $("bk").style.display=page==="r"?"none":"flex";if(d)renderD();else $("app").innerHTML=page==="t"?pageT():page==="g"?pageG():pageR()}
-$("hdt").textContent=d?NAV:page==="t"?"Temps d’écran":page==="g"?"Général":"Réglages";
+  $("bk").style.display=page==="r"?"none":"flex";
+  $("hdt").textContent=d?NAV:page==="t"?"Temps d’écran":page==="g"?"Général":"Réglages";
+  if(d)renderD();else $("app").innerHTML=page==="t"?pageT():page==="g"?pageG():pageR()}
   $("bk").onclick=function(){go(page==="d"?"t":"r")};
 window.addEventListener("scroll",function(){var y=window.scrollY;$("dn").classList.toggle("show",page==="d"&&y>300);if(page==="r")$("hdt").style.opacity=y>70?1:0});
 
