@@ -166,21 +166,13 @@ function wkDays(vals,max,yl,avgc){
   '<div class="ya">'+yl.map(function(y){return '<span style="bottom:'+y[0]+'%">'+y[1]+'</span>'}).join("")+'</div></div>'+
   '<div class="lb">'+["L","M","M","J","V","S","D"].map(function(l,i){return '<span style="left:'+i*100/7+'%">'+l+'</span>'}).join("")+'</div>';
 }
-  function wkDays(vals,max,yl,avgc){
-  var avg=vals.reduce(function(a,b){return a+b},0)/7;
-  return '<div class="cw"><div class="pl">'+grid(4,7)+
-  vals.map(function(v,i){
-    var p=v/max*100;
-    return '<div class="sl" style="left:'+i*100/7+'%;width:'+100/7+'%"><div class="bar" style="height:'+p+'%"><i style="height:100%;background:#00d4e0"></i></div></div>';
-  }).join("")+
-  '<div class="avg" style="bottom:'+avg/max*100+'%;border-color:'+avgc+'"></div></div>'+
-  '<div class="ya">'+yl.map(function(y){return '<span style="bottom:'+y[0]+'%">'+y[1]+'</span>'}).join("")+'</div></div>'+
-  '<div class="lb">'+["L","M","M","J","V","S","D"].map(function(l,i){return '<span style="left:'+i*100/7+'%">'+l+'</span>'}).join("")+'</div>';
-}var t=S(segs),p=t/max*100;
+
+function wk(segs,cols,max,yl,avgc){
+  var t=S(segs),p=t/max*100;
   return '<div class="cw"><div class="pl">'+grid(4,7)+'<div class="sl" style="left:0;width:'+100/7+'%"><div class="bar" style="height:'+p+'%">'+segs.map(function(v,k){return v?'<i style="height:'+v/t*100+'%;background:'+cols[k]+'"></i>':""}).join("")+'</div></div><div class="avg" style="bottom:'+p+'%;border-color:'+avgc+'"></div></div>'+
   '<div class="ya"><span style="bottom:'+p+'%;color:'+avgc+'">moy.</span>'+yl.map(function(y){return '<span style="bottom:'+y[0]+'%">'+y[1]+'</span>'}).join("")+'</div></div>'+
-  '<div class="lb">'+["L","M","M","J","V","S","D"].map(function(l,i){return '<span style="left:'+i*100/7+'%">'+l+'</span>'}).join("")+'</div>'}
-function hr(d,cols,max,yl){var h='<div class="cw"><div class="pl'+(sel>-1?" dim":"")+'">'+grid(4,4);
+  '<div class="lb">'+["L","M","M","J","V","S","D"].map(function(l,i){return '<span style="left:'+i*100/7+'%">'+l+'</span>'}).join("")+'</div>';
+}{var h='<div class="cw"><div class="pl'+(sel>-1?" dim":"")+'">'+grid(4,4);
   for(var i=0;i<24;i++){var t=S(d[i]);h+='<div class="sl'+(sel===i?" on":"")+'" data-i="'+i+'" style="left:'+i*100/24+'%;width:'+100/24+'%">'+(t?'<div class="bar" style="height:'+t/max*100+'%">'+d[i].map(function(v,k){return v?'<i style="height:'+v/t*100+'%;background:'+cols[k]+'"></i>':""}).join("")+'</div>':"")+'</div>'}
   return h+'</div>'+ya(yl)+'</div><div class="lb">'+["00 h","06 h","12 h","18 h"].map(function(l,i){return '<span style="left:'+i*25+'%">'+l+'</span>'}).join("")+'</div>'}
 function leg(a){return '<div class="leg"><div style="color:var(--c1)"><b>Réseaux sociaux</b><em style="color:var(--tx)">'+f(a[0])+'</em></div><div class="r" style="color:var(--c2)"><b>Autres</b><em style="color:var(--tx)">'+f(a[1])+'</em></div><div style="color:var(--c3)"><b>Productivité et finances</b><em style="color:var(--tx)">'+f(a[2])+'</em></div></div>'}
