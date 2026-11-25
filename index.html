@@ -165,6 +165,17 @@ function wkDays(vals,max,yl,avgc){
   '<div class="avg" style="bottom:'+avg/max*100+'%;border-color:'+avgc+'"></div></div>'+
   '<div class="ya">'+yl.map(function(y){return '<span style="bottom:'+y[0]+'%">'+y[1]+'</span>'}).join("")+'</div></div>'+
   '<div class="lb">'+["L","M","M","J","V","S","D"].map(function(l,i){return '<span style="left:'+i*100/7+'%">'+l+'</span>'}).join("")+'</div>';
+}
+  function wkDays(vals,max,yl,avgc){
+  var avg=vals.reduce(function(a,b){return a+b},0)/7;
+  return '<div class="cw"><div class="pl">'+grid(4,7)+
+  vals.map(function(v,i){
+    var p=v/max*100;
+    return '<div class="sl" style="left:'+i*100/7+'%;width:'+100/7+'%"><div class="bar" style="height:'+p+'%"><i style="height:100%;background:#00d4e0"></i></div></div>';
+  }).join("")+
+  '<div class="avg" style="bottom:'+avg/max*100+'%;border-color:'+avgc+'"></div></div>'+
+  '<div class="ya">'+yl.map(function(y){return '<span style="bottom:'+y[0]+'%">'+y[1]+'</span>'}).join("")+'</div></div>'+
+  '<div class="lb">'+["L","M","M","J","V","S","D"].map(function(l,i){return '<span style="left:'+i*100/7+'%">'+l+'</span>'}).join("")+'</div>';
 }var t=S(segs),p=t/max*100;
   return '<div class="cw"><div class="pl">'+grid(4,7)+'<div class="sl" style="left:0;width:'+100/7+'%"><div class="bar" style="height:'+p+'%">'+segs.map(function(v,k){return v?'<i style="height:'+v/t*100+'%;background:'+cols[k]+'"></i>':""}).join("")+'</div></div><div class="avg" style="bottom:'+p+'%;border-color:'+avgc+'"></div></div>'+
   '<div class="ya"><span style="bottom:'+p+'%;color:'+avgc+'">moy.</span>'+yl.map(function(y){return '<span style="bottom:'+y[0]+'%">'+y[1]+'</span>'}).join("")+'</div></div>'+
