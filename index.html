@@ -112,8 +112,22 @@ function Z(){var a=[];for(var i=0;i<24;i++)a.push(0);return a}
 function S(a){return a.reduce(function(x,y){return x+y},0)}
 /* temps par heure : [réseaux sociaux, autres, productivité, non catégorisé] en minutes */
 var H=[];for(var i=0;i<24;i++)H.push([0,0,0,0]);
-H[6]=[0,3,0,2];H[7]=[45,10,0,3];H[8]=[20,4,0,0];H[13]=[25,20,6,1];H[14]=[14,3,2,1];H[15]=[38,3,0,1];H[16]=[19,2,6,0];H[17]=[30,3,12,0];H[18]=[29,10,0,0];H[19]=[8,2,0,0];
-var T=[0,0,0,0];H.forEach(function(r){r.forEach(function(v,k){T[k]+=v})});var TOT=S(T)+28;
+H[6]=[0,3,0,2];
+H[7]=[65,15,0,3];
+H[8]=[30,8,0,0];
+H[13]=[40,30,8,1];
+H[14]=[20,8,3,1];
+H[15]=[50,8,0,1];
+H[16]=[25,5,8,0];
+H[17]=[36,5,13,0];
+H[18]=[29,10,0,0];
+H[19]=[8,2,0,0];
+
+var T=[0,0,0,0];
+H.forEach(function(r){
+  r.forEach(function(v,k){T[k]+=v})
+});
+var TOT=S(T)+28;
 var A=Z(),N=Z();
 var A=Z(),N=Z();
 [[6,2],[7,7],[8,3],[13,6],[14,4],[15,8],[16,5],[17,9],[18,7],[19,4]].forEach(function(p){A[p[0]]=p[1]});
