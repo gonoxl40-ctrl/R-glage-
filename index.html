@@ -155,7 +155,17 @@ function f(m){var h=Math.floor(m/60),r=m%60;return h?(r?h+"h "+r+"min":h+"h"):r+
 function icon(n){if(n.indexOf("index-")>-1)return '<div class="ic r2">I</div>';var d=IC[n];return '<div class="ic" style="background:'+d[0]+';color:'+(d[2]||"#000")+'">'+d[1]+'</div>'}
 function grid(r,n){var h="",i;for(i=0;i<=r;i++)h+='<div class="hl" style="top:'+i*100/r+'%"></div>';for(i=0;i<=n;i++)h+='<div class="vl" style="'+(i==n?"right:0":"left:"+i*100/n+"%")+'"></div>';return h}
 function ya(yl){return '<div class="ya">'+yl.map(function(y){return '<span style="bottom:'+y[0]+'%">'+y[1]+'</span>'}).join("")+'</div>'}
-function wk(segs,cols,max,yl,avgc){var t=S(segs),p=t/max*100;
+function wkDays(vals,max,yl,avgc){
+  var avg=vals.reduce(function(a,b){return a+b},0)/7;
+  return '<div class="cw"><div class="pl">'+grid(4,7)+
+  vals.map(function(v,i){
+    var p=v/max*100;
+    return '<div class="sl" style="left:'+i*100/7+'%;width:'+100/7+'%"><div class="bar" style="height:'+p+'%"><i style="height:100%;background:#00d4e0"></i></div></div>';
+  }).join("")+
+  '<div class="avg" style="bottom:'+avg/max*100+'%;border-color:'+avgc+'"></div></div>'+
+  '<div class="ya">'+yl.map(function(y){return '<span style="bottom:'+y[0]+'%">'+y[1]+'</span>'}).join("")+'</div></div>'+
+  '<div class="lb">'+["L","M","M","J","V","S","D"].map(function(l,i){return '<span style="left:'+i*100/7+'%">'+l+'</span>'}).join("")+'</div>';
+}var t=S(segs),p=t/max*100;
   return '<div class="cw"><div class="pl">'+grid(4,7)+'<div class="sl" style="left:0;width:'+100/7+'%"><div class="bar" style="height:'+p+'%">'+segs.map(function(v,k){return v?'<i style="height:'+v/t*100+'%;background:'+cols[k]+'"></i>':""}).join("")+'</div></div><div class="avg" style="bottom:'+p+'%;border-color:'+avgc+'"></div></div>'+
   '<div class="ya"><span style="bottom:'+p+'%;color:'+avgc+'">moy.</span>'+yl.map(function(y){return '<span style="bottom:'+y[0]+'%">'+y[1]+'</span>'}).join("")+'</div></div>'+
   '<div class="lb">'+["L","M","M","J","V","S","D"].map(function(l,i){return '<span style="left:'+i*100/7+'%">'+l+'</span>'}).join("")+'</div>'}
