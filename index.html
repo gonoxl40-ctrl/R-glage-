@@ -111,33 +111,25 @@ var UPD=DAILY_DATA.update,DATE=DAILY_DATA.date,FIRST=DAILY_DATA.firstUse,NAV=DAI
 var C=["var(--c1)","var(--c2)","var(--c3)","var(--c4)"],CC=["var(--c2)"],CR=["var(--red)"];
 function Z(){var a=[];for(var i=0;i<24;i++)a.push(0);return a}
 function S(a){return a.reduce(function(x,y){return x+y},0)}
-/* temps par heure : [réseaux sociaux, autres, productivité, non catégorisé] en minutes */
-var H=[];for(var i=0;i<24;i++)H.push([0,0,0,0]);
-H[6]=[0,3,0,2];
-H[7]=[65,15,0,3];
-H[8]=[30,8,0,0];
-H[13]=[40,30,8,1];
-H[14]=[20,8,3,1];
-H[15]=[50,8,0,1];
-H[16]=[25,5,8,0];
-H[17]=[36,5,13,0];
-H[18]=[29,10,0,0];
-H[19]=[8,2,0,0];
+var H=DAILY_DATA.hourlyUsage;
+var T=[
+  DAILY_DATA.categories.social,
+  DAILY_DATA.categories.other,
+  DAILY_DATA.categories.utilities,
+  0
+];
+var TOT=DAILY_DATA.total;
+var WEEK=DAILY_DATA.weeklyUsage;
 
-var T=[0,0,0,0];
-H.forEach(function(r){
-  r.forEach(function(v,k){T[k]+=v})
-});
-var TOT=S(T)+28;
-var WEEK=[350,350,465,0,0,0,0];
 var A=Z(),N=Z();
-var A=Z(),N=Z();
-[[6,2],[7,7],[8,3],[13,6],[14,4],[15,8],[16,5],[17,9],[18,7],[19,4]].forEach(function(p){A[p[0]]=p[1]});
-[[6,2],[7,5],[8,3],[13,9],[14,6],[15,12],[16,8],[17,16],[18,14],[19,9]].forEach(function(p){N[p[0]]=p[1]});
 var SA=S(A),SN=S(N);
-var LT=[["Instagram",260],["ChatGPT",45],["WhatsApp",32],["Photos",28],["Chrome",24],["PRONOTE",24],["0400005n.index-education.net",24]],XT=[["Snapchat",9],["YouTube",6],["Messages",4]];
-var LA=[["Instagram",14],["WhatsApp",8],["Photos",5],["PRONOTE",4]],XA=[["Chrome",3],["Snapchat",2]];
-var LN=[["Snapchat",35],["WhatsApp",21],["leboncoin",8],["YouTube",6]],XN=[["Instagram",5],["Messages",3]];
+
+var LT=DAILY_DATA.apps
+  .filter(function(a){return a.category==="social"||a.category==="other"||a.category==="utilities"})
+  .map(function(a){return [a.name,a.time]});
+
+var XT=[];
+var LA=[],XA=[],LN=[],XN=[];
 var PH='<svg width="29" height="29" viewBox="0 0 29 29"><g transform="translate(14.5 14.5)" style="isolation:isolate">'+["#f9c935","#f5901e","#ee4b4b","#c44fb6","#6a5ae0","#2f9fe8","#3cc46a","#a6d83a"].map(function(c,i){return '<ellipse cx="0" cy="-5.6" rx="3.6" ry="5.6" fill="'+c+'" style="mix-blend-mode:multiply" transform="rotate('+i*45+')"/>'}).join("")+'</g></svg>';
 var IC={
 Instagram:["transparent",'<svg width="29" height="29" viewBox="0 0 29 29"><defs><radialGradient id="ig" cx=".3" cy="1.05" r="1.15"><stop offset="0" stop-color="#fdf497"/><stop offset=".1" stop-color="#fdf497"/><stop offset=".45" stop-color="#fd5949"/><stop offset=".6" stop-color="#d6249f"/><stop offset=".95" stop-color="#285aeb"/></radialGradient></defs><rect width="29" height="29" fill="url(#ig)"/><rect x="7" y="7" width="15" height="15" rx="4.5" fill="none" stroke="#fff" stroke-width="1.9"/><circle cx="14.5" cy="14.5" r="3.5" fill="none" stroke="#fff" stroke-width="1.9"/><circle cx="18.8" cy="10.2" r="1.1" fill="#fff"/></svg>'],
